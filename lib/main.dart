@@ -110,14 +110,13 @@ class InfoPage extends StatelessWidget {
               width: 10,
             ),
             TextButton(
-              onPressed: () async {
-                Uri url = Uri.parse('https://flutter.cn/');
-                if (!await launchUrl(url)) {
-                  throw Exception('Could not launch $url');
-                }
-              },
-              child: Text("Flutter")
-            ),
+                onPressed: () async {
+                  Uri url = Uri.parse('https://flutter.cn/');
+                  if (!await launchUrl(url)) {
+                    throw Exception('Could not launch $url');
+                  }
+                },
+                child: Text("Flutter")),
           ],
         ),
         SizedBox(
@@ -125,10 +124,11 @@ class InfoPage extends StatelessWidget {
         ),
         IconButton(
           onPressed: () async {
-            Uri url = Uri.parse('https://gitee.com/Ryan-zhou/cute-http-file-server-gui');
-              if (!await launchUrl(url)) {
-                throw Exception('Could not launch $url');
-              }
+            Uri url = Uri.parse(
+                'https://gitee.com/Ryan-zhou/cute-http-file-server-gui');
+            if (!await launchUrl(url)) {
+              throw Exception('Could not launch $url');
+            }
           },
           icon: Icon(Icons.code),
           color: Colors.blue,
@@ -148,21 +148,30 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        WindowTitleBarBox(
-          child: MoveWindow(
-            child:
-              Container(
-                color: const Color.fromRGBO(250, 250, 250, 1)
+    return MaterialApp(
+      home: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.blue,
+          child: const Icon(Icons.keyboard_arrow_right),
+        ),
+        body: Column(
+          children: [
+            WindowTitleBarBox(
+              child: MoveWindow(
+                child:
+                  Container(
+                    color: const Color.fromRGBO(250, 250, 250, 1)
+                  )
               )
-          )
+            ),
+            Text(
+              "CuteHttpFileServer GUI",
+              style: TextStyle(fontSize: 15),
+            ),
+          ],
         ),
-        Text(
-          "CuteHttpFileServer GUI",
-          style: TextStyle(fontSize: 15),
-        ),
-      ],
+      ),
     );
   }
 }
