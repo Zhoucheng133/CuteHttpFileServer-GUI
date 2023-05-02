@@ -1,8 +1,9 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages, unused_local_variable, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:file_picker/file_picker.dart';
 
 void main() {
   runApp(const MainApp());
@@ -147,6 +148,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController inputPort = TextEditingController();
+  String? selectedDirectory = "";
+
   @override
   void initState() {
     super.initState();
@@ -173,19 +176,39 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 15),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: inputPort,
-                    decoration: InputDecoration(
-                      labelText: '端口',
-                      border: OutlineInputBorder(),
+                padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: inputPort,
+                      decoration: InputDecoration(
+                        labelText: '端口',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  )
-                ],
-              )
-            ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: TextField(),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                            onPressed: () async {
+                              String? tmp =
+                                  await FilePicker.platform.getDirectoryPath();
+                              setState(() {
+                                selectedDirectory = tmp;
+                              });
+                            },
+                            child: Text("选取目录"))
+                      ],
+                    )
+                  ],
+                )),
           ],
         ),
       ),
