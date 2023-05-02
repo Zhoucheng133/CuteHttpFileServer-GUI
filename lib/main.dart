@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 10,
         ),
-        Text("GUI for Mac")
+        Text("GUI version")
       ],
     );
   }
