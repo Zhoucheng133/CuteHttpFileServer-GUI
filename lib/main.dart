@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:process_run/process_run.dart';
+import 'package:process_run/shell.dart';
 
 void main() {
   runApp(const MainApp());
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             var shell = Shell();
-            await shell.run("cd /Volumes/PSSD && touch hello_world.txt");
+            await shell.run("lib/command/chfs_mac");
           },
           backgroundColor: Colors.blue,
           child: const Icon(Icons.keyboard_arrow_right),
