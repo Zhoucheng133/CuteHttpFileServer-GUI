@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
   TextEditingController inputPath = TextEditingController();
-  int shareMethod = 0;
+  int shareMethod = 1;
 
   @override
   void initState() {
@@ -222,14 +222,21 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     children: [
                       Radio(
-                        value: 0,
+                        value: 1,
                         groupValue: shareMethod,
                         onChanged: (v) {
                           setState(() {
                             shareMethod = v!;
                           });
                         }),
-                      Text("所有设备:读/写")
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            shareMethod=1;
+                          });
+                        },
+                        child: Text("所有设备:读/写")
+                      )
                     ],
                   ),
                   Row(
@@ -242,7 +249,14 @@ class _HomePageState extends State<HomePage> {
                             shareMethod = v!;
                           });
                         }),
-                      Text("所有设备:读取,指定用户:读/写")
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            shareMethod=2;
+                          });
+                        },
+                        child: Text("所有设备:读取,指定用户:读/写"),
+                      )
                     ],
                   ),
                   Row(
@@ -254,8 +268,17 @@ class _HomePageState extends State<HomePage> {
                           setState(() {
                             shareMethod = v!;
                           });
-                        }),
-                      Text("指定用户:读/写")
+                        }
+                      ),
+                      // Text("指定用户:读/写")
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            shareMethod=3;
+                          });
+                        },
+                        child: Text("指定用户:读/写")
+                      )
                     ],
                   ),
                 ],
