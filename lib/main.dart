@@ -41,7 +41,6 @@ class _MainApp extends State<MainApp> {
               BottomNavigationBarItem(icon: Icon(Icons.info), label: "关于"),
             ],
             onTap: (int index) {
-              // curIndex = index;
               setState(() {
                 curIndex = index;
               });
@@ -66,7 +65,71 @@ class InfoPage extends StatelessWidget {
             child: MoveWindow(
                 child:
                     Container(color: const Color.fromRGBO(250, 250, 250, 1)))),
-        Text("info Page")
+        Text(
+          "关于本软件",
+          style: TextStyle(
+            fontSize: 15
+          ),
+        ),
+        SizedBox(
+          height: 120,
+        ),
+        Text(
+          "CuteHttpFileServer",
+          style: TextStyle(
+            fontSize: 30
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          "GUI version",
+          style: TextStyle(fontSize: 15),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Text(
+          "Version: 0.0.1 Alpha"
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Text("本程序基于: "),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: ()=>{
+
+              },
+              child: Text("chfs")
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            TextButton(
+              onPressed: () => {
+
+              }, 
+              child: Text("Flutter")
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        IconButton(
+          onPressed: (){
+
+          }, 
+          icon: Icon(Icons.code),
+          color: Colors.blue,
+        )
       ],
     );
   }
