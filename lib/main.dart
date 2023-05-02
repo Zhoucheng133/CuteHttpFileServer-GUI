@@ -150,6 +150,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
   TextEditingController inputPath = TextEditingController();
+  int shareMethod = 0;
 
   @override
   void initState() {
@@ -214,7 +215,49 @@ class _HomePageState extends State<HomePage> {
                         child: Text("选取目录")
                       )
                     ],
-                  )
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: 0,
+                        groupValue: shareMethod,
+                        onChanged: (v) {
+                          setState(() {
+                            shareMethod = v!;
+                          });
+                        }),
+                      Text("所有设备:读/写")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: 2,
+                        groupValue: shareMethod,
+                        onChanged: (v) {
+                          setState(() {
+                            shareMethod = v!;
+                          });
+                        }),
+                      Text("所有设备:读取,指定用户:读/写")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: 3,
+                        groupValue: shareMethod,
+                        onChanged: (v) {
+                          setState(() {
+                            shareMethod = v!;
+                          });
+                        }),
+                      Text("指定用户:读/写")
+                    ],
+                  ),
                 ],
               )
             ),
