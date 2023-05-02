@@ -178,45 +178,46 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 15),
             ),
             Padding(
-                padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: inputPort,
-                      decoration: InputDecoration(
-                        labelText: '端口',
-                        border: OutlineInputBorder(),
-                      ),
+              padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: inputPort,
+                    decoration: InputDecoration(
+                      labelText: '端口',
+                      border: OutlineInputBorder(),
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          child: TextField(
-                            controller: inputPath,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(), labelText: "路径"),
-                          ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 200,
+                        child: TextField(
+                          controller: inputPath,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: "路径"),
                         ),
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: () async {
-                            String? tmp =
-                                await FilePicker.platform.getDirectoryPath();
-                            setState(() {
-                              selectedDirectory = tmp;
-                              inputPath.text = tmp.toString();
-                            });
-                          },
-                          child: Text("选取目录")
-                        )
-                      ],
-                    )
-                  ],
-                )),
+                      ),
+                      Spacer(),
+                      ElevatedButton(
+                        onPressed: () async {
+                          String? tmp =
+                              await FilePicker.platform.getDirectoryPath();
+                          setState(() {
+                            selectedDirectory = tmp;
+                            inputPath.text = tmp.toString();
+                          });
+                        },
+                        child: Text("选取目录")
+                      )
+                    ],
+                  )
+                ],
+              )
+            ),
           ],
         ),
       ),
