@@ -151,9 +151,13 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         WindowTitleBarBox(
-            child: MoveWindow(
-                child:
-                    Container(color: const Color.fromRGBO(250, 250, 250, 1)))),
+          child: MoveWindow(
+            child:
+              Container(
+                color: const Color.fromRGBO(250, 250, 250, 1)
+              )
+          )
+        ),
         Text(
           "CuteHttpFileServer GUI",
           style: TextStyle(fontSize: 15),
