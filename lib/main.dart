@@ -146,26 +146,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var helloworld = "";
-
-  @override
-  void initState() {
-    super.initState();
-    var now = DateTime.now();
-    if (now.hour < 11) {
-      // helloworld = "早上好";
-      setState(() {
-        helloworld = "早上好";
-      });
-    } else if (now.hour < 14) {
-      helloworld = "中午好";
-    } else if (now.hour < 18) {
-      helloworld = "下午好";
-    } else {
-      helloworld = "晚上好";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -174,19 +154,10 @@ class _HomePageState extends State<HomePage> {
             child: MoveWindow(
                 child:
                     Container(color: const Color.fromRGBO(250, 250, 250, 1)))),
-        SizedBox(
-          height: 40,
-        ),
-        Text("哈喽，$helloworld呀！"),
-        SizedBox(height: 40),
         Text(
-          "CuteHttpFileServer",
-          style: TextStyle(fontSize: 30),
+          "CuteHttpFileServer GUI",
+          style: TextStyle(fontSize: 15),
         ),
-        SizedBox(
-          height: 10,
-        ),
-        Text("GUI version")
       ],
     );
   }
