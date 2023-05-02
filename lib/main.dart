@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
     var now = DateTime.now();
     if (now.hour < 11) {
       // helloworld = "早上好";
-      setState(() {''
+      setState(() {
         helloworld = "早上好";
       });
     } else if (now.hour < 14) {
