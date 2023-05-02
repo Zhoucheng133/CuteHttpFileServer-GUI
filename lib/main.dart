@@ -146,6 +146,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController inputPort = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    inputPort.text = "81";
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -158,16 +165,26 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: [
             WindowTitleBarBox(
-              child: MoveWindow(
-                child:
-                  Container(
-                    color: const Color.fromRGBO(250, 250, 250, 1)
-                  )
-              )
-            ),
+                child: MoveWindow(
+                    child: Container(
+                        color: const Color.fromRGBO(250, 250, 250, 1)))),
             Text(
               "CuteHttpFileServer GUI",
               style: TextStyle(fontSize: 15),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: inputPort,
+                    decoration: InputDecoration(
+                      labelText: '端口',
+                      border: OutlineInputBorder(),
+                    ),
+                  )
+                ],
+              )
             ),
           ],
         ),
