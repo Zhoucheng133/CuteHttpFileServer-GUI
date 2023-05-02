@@ -168,7 +168,10 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            var shell = Shell();
+            await shell.run();
+          },
           backgroundColor: Colors.blue,
           child: const Icon(Icons.keyboard_arrow_right),
         ),
