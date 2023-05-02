@@ -200,8 +200,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 );
-              }
-              if(inputPort.text=="" || int.tryParse(inputPort.text)==null){
+              }else if(inputPort.text=="" || int.tryParse(inputPort.text)==null){
                 return showDialog<void>(
                   context: context,
                   barrierDismissible: false, // user must tap button!
@@ -226,8 +225,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 );
-              }
-              if(shareMethod!=1 && (inputUser.text=="" || inputPass.text=="")){
+              }else if(shareMethod!=1 && (inputUser.text=="" || inputPass.text=="")){
                 return showDialog<void>(
                   context: context,
                   barrierDismissible: false, // user must tap button!
@@ -237,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                       content: SingleChildScrollView(
                         child: ListBody(
                           children: const <Widget>[
-                            Text('你没有输入制定用户信息')
+                            Text('你没有输入指定用户信息')
                           ],
                         ),
                       ),
@@ -253,11 +251,20 @@ class _HomePageState extends State<HomePage> {
                   },
                 );
               }
+              // 下面执行命令
+              String command="";
+              if(shareMethod==1){
+                command="lib/command/chfs_mac --port=${inputPort.text} --path=\"${inputPath.text}\"";
+              }else if(shareMethod==2){
+                command="lib/command/chfs_mac --port=${inputPort.text} --path=\"${inputPath.text}\" --rule=\"::r|${inputUser.text}:${inputPass.text}:rwd\"";
+              }else{
+                command="lib/command/chfs_mac --port=${inputPort.text} --path=\"${inputPath.text}\" --rule=\"::|${inputUser.text}:${inputPass.text}:rwd\"";
+              }
               setState(() {
                 isRun=true;
               });
               try {
-                await shell.run("lib/command/chfs_mac");
+                await shell.run(command);
               } on ShellException catch (_) {
                 // We might get a shell exception
               }
