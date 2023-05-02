@@ -1,3 +1,8 @@
-# chfs_mac_gui
+# chfs Mac的图形化版本
 
-A new Flutter project.
+望有大佬帮忙完善这个项目
+
+目前的问题：  
+在release之后就无法索引到Unix可执行文件  
+本人已尝试过将其加入到assets，但是无法索引到release后的Unix可执行文件  
+也同样尝试过将此文件拷贝到本地其他位置后再执行，但是macOS系统机制不允许打开由程序创建的Unix可执行文件  
