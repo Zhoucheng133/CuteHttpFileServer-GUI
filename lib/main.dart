@@ -149,11 +149,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
+  TextEditingController inputPath = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     inputPort.text = "81";
+    inputPath.text = "没有选择路径";
   }
 
   @override
@@ -193,7 +195,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         SizedBox(
                           width: 200,
-                          child: TextField(),
+                          child: TextField(
+                            controller: inputPath,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(), labelText: "路径"),
+                          ),
                         ),
                         Spacer(),
                         ElevatedButton(
@@ -202,6 +208,7 @@ class _HomePageState extends State<HomePage> {
                                   await FilePicker.platform.getDirectoryPath();
                               setState(() {
                                 selectedDirectory = tmp;
+                                inputPath.text = tmp.toString();
                               });
                             },
                             child: Text("选取目录"))
