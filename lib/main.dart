@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MainApp());
@@ -67,18 +68,14 @@ class InfoPage extends StatelessWidget {
                     Container(color: const Color.fromRGBO(250, 250, 250, 1)))),
         Text(
           "关于本软件",
-          style: TextStyle(
-            fontSize: 15
-          ),
+          style: TextStyle(fontSize: 15),
         ),
         SizedBox(
           height: 120,
         ),
         Text(
           "CuteHttpFileServer",
-          style: TextStyle(
-            fontSize: 30
-          ),
+          style: TextStyle(fontSize: 30),
         ),
         SizedBox(
           height: 10,
@@ -90,9 +87,7 @@ class InfoPage extends StatelessWidget {
         SizedBox(
           height: 50,
         ),
-        Text(
-          "Version: 0.0.1 Alpha"
-        ),
+        Text("Version: 0.0.1 Alpha"),
         SizedBox(
           height: 50,
         ),
@@ -104,18 +99,23 @@ class InfoPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: ()=>{
-
-              },
-              child: Text("chfs")
-            ),
+                onPressed: () async {
+                  Uri url = Uri.parse('http://iscute.cn/chfs');
+                  if (!await launchUrl(url)) {
+                    throw Exception('Could not launch $url');
+                  }
+                },
+                child: Text("chfs")),
             SizedBox(
               width: 10,
             ),
             TextButton(
-              onPressed: () => {
-
-              }, 
+              onPressed: () async {
+                Uri url = Uri.parse('https://flutter.cn/');
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
               child: Text("Flutter")
             ),
           ],
@@ -124,9 +124,12 @@ class InfoPage extends StatelessWidget {
           height: 20,
         ),
         IconButton(
-          onPressed: (){
-
-          }, 
+          onPressed: () async {
+            Uri url = Uri.parse('https://gitee.com/Ryan-zhou/cute-http-file-server-gui');
+              if (!await launchUrl(url)) {
+                throw Exception('Could not launch $url');
+              }
+          },
           icon: Icon(Icons.code),
           color: Colors.blue,
         )
