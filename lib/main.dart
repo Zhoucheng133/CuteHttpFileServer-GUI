@@ -150,6 +150,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
   TextEditingController inputPath = TextEditingController();
+  TextEditingController inputUser = TextEditingController();
+  TextEditingController inputPass = TextEditingController();
   int shareMethod = 1;
 
   @override
@@ -199,7 +201,9 @@ class _HomePageState extends State<HomePage> {
                         child: TextField(
                           controller: inputPath,
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(), labelText: "路径"),
+                            border: OutlineInputBorder(),
+                            labelText: "路径"
+                          ),
                         ),
                       ),
                       Spacer(),
@@ -281,6 +285,13 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  TextField(
+                    controller: inputUser,
+
+                  )
                 ],
               )
             ),
