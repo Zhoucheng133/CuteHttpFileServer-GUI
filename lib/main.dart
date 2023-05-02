@@ -9,7 +9,7 @@ void main() {
   runApp(const MainApp());
   doWhenWindowReady(() {
     final win = appWindow;
-    const initialSize = Size(400, 600);
+    const initialSize = Size(400, 620);
     win.size = initialSize;
     win.minSize = initialSize;
     win.maxSize = initialSize;
@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Row(
                     children: [
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Row(
                     children: [
@@ -286,11 +286,26 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   TextField(
+                    enabled: shareMethod==1?false:true,
                     controller: inputUser,
-
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "用户名"
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    enabled: shareMethod==1?false:true,
+                    controller: inputPass,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "密码"
+                    ),
                   )
                 ],
               )
