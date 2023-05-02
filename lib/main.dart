@@ -203,15 +203,16 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Spacer(),
                         ElevatedButton(
-                            onPressed: () async {
-                              String? tmp =
-                                  await FilePicker.platform.getDirectoryPath();
-                              setState(() {
-                                selectedDirectory = tmp;
-                                inputPath.text = tmp.toString();
-                              });
-                            },
-                            child: Text("选取目录"))
+                          onPressed: () async {
+                            String? tmp =
+                                await FilePicker.platform.getDirectoryPath();
+                            setState(() {
+                              selectedDirectory = tmp;
+                              inputPath.text = tmp.toString();
+                            });
+                          },
+                          child: Text("选取目录")
+                        )
                       ],
                     )
                   ],
