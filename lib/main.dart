@@ -65,9 +65,12 @@ class InfoPage extends StatelessWidget {
     return Column(
       children: [
         WindowTitleBarBox(
-            child: MoveWindow(
-                child:
-                    Container(color: const Color.fromRGBO(250, 250, 250, 1)))),
+          child: MoveWindow(
+            child:
+              Container(color: const Color.fromRGBO(250, 250, 250, 1)
+            )
+          )
+        ),
         Text(
           "关于本软件",
           style: TextStyle(fontSize: 15),
@@ -170,7 +173,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             var shell = Shell();
-            await shell.run();
+            await shell.run("cd /Volumes/PSSD && touch hello_world.txt");
           },
           backgroundColor: Colors.blue,
           child: const Icon(Icons.keyboard_arrow_right),
