@@ -158,6 +158,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController inputPass = TextEditingController();
   int shareMethod = 1;
   bool isRun = false;
+  var shell = Shell();
 
   @override
   void initState() {
@@ -172,11 +173,26 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            var shell = Shell();
-            await shell.run("lib/command/chfs_mac");
+            
+            if(isRun==false){
+              setState(() {
+                isRun=true;
+              });
+              try {
+                await shell.run("lib/command/chfs_mac");
+              } on ShellException catch (_) {
+                // We might get a shell exception
+              }
+            }else{
+              shell.kill();
+              setState(() {
+                isRun=false;
+              });
+              
+            }
           },
           backgroundColor: Colors.blue,
-          child: const Icon(Icons.keyboard_arrow_right),
+          child: isRun==false?Icon(Icons.keyboard_arrow_right):Icon(Icons.square),
         ),
         body: Column(
           children: [
