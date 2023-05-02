@@ -173,33 +173,86 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            if(inputPath.text=="没有选择路径"){
-              return showDialog<void>(
-                context: context,
-                barrierDismissible: false, // user must tap button!
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('无法继续'),
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: const <Widget>[
-                          Text('你没有选取目录')
-                        ],
-                      ),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('知道了'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            }
+            // 下面是命令的执行
             if(isRun==false){
+              if(inputPath.text=="没有选择路径"){
+                return showDialog<void>(
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('无法继续'),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: const <Widget>[
+                            Text('你没有选取目录')
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('知道了'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+              if(inputPort.text=="" || int.tryParse(inputPort.text)==null){
+                return showDialog<void>(
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('无法继续'),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: const <Widget>[
+                            Text('端口号为空或者不合法')
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('知道了'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+              if(shareMethod!=1 && (inputUser.text=="" || inputPass.text=="")){
+                return showDialog<void>(
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('无法继续'),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: const <Widget>[
+                            Text('你没有输入制定用户信息')
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('知道了'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
               setState(() {
                 isRun=true;
               });
