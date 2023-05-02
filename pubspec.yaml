@@ -11,6 +11,7 @@ dependencies:
   file_picker: ^5.2.10
   flutter:
     sdk: flutter
+  process_run: ^0.13.0
   url_launcher: ^6.1.10
 
 dev_dependencies:

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:process_run/process_run.dart';
 
 void main() {
   runApp(const MainApp());
@@ -153,6 +154,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController inputUser = TextEditingController();
   TextEditingController inputPass = TextEditingController();
   int shareMethod = 1;
+  bool isRun = false;
 
   @override
   void initState() {
@@ -173,9 +175,12 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: [
             WindowTitleBarBox(
-                child: MoveWindow(
-                    child: Container(
-                        color: const Color.fromRGBO(250, 250, 250, 1)))),
+              child: MoveWindow(
+                child: Container(
+                  color: const Color.fromRGBO(250, 250, 250, 1)
+                )
+              )
+            ),
             Text(
               "CuteHttpFileServer GUI",
               style: TextStyle(fontSize: 15),
