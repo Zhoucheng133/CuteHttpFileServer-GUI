@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages, unused_local_variable, avoid_unnecessary_containers
+// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages, unused_local_variable, avoid_unnecessary_containers, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -71,6 +71,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,7 +83,11 @@ class _SettingPageState extends State<SettingPage> {
             )
           )
         ),
-        Text("")
+        // Text(sharedPreferences?.getBool("isRun")==true ? '正在运行':'不在运行'),
+        TextButton(onPressed: (){
+          _HomePageState._clearData();
+          print("OKOK");
+        }, child: Text("清除"))
       ],
     );
   }
@@ -199,7 +204,31 @@ class _HomePageState extends State<HomePage> {
     inputPort.text = "81";
     inputPath.text = "没有选择分享路径";
     inputProgram.text="没有选择程序路径";
+    _haveData();
   }
+  
+  static void _clearData()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+		prefs.clear();
+  }
+
+  void _haveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+		String sharePath=prefs.getString("sharePath") ?? "";
+		String programPath=prefs.getString("programPath") ?? "";
+		if(sharePath!=''){
+      inputPath.text=sharePath;
+		}
+    if(programPath!=''){
+      inputProgram.text=programPath;
+    }
+  }
+
+  void _setData(String sharePath, String programPath) async {
+		SharedPreferences prefs = await SharedPreferences.getInstance();
+		await prefs.setString('sharePath', sharePath);
+		await prefs.setString('programPath', programPath);
+	}
 
   @override
   Widget build(BuildContext context) {
@@ -327,6 +356,8 @@ class _HomePageState extends State<HomePage> {
               } on ShellException catch (_) {
                 // We might get a shell exception
               }
+
+              _setData(inputPath.text,inputProgram.text);
             }else{
               shell.kill();
               setState(() {
