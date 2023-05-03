@@ -5,6 +5,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:process_run/shell.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MainApp());
@@ -52,8 +53,37 @@ class _MainApp extends State<MainApp> {
           ),
           body: IndexedStack(
             index: curIndex,
-            children: <Widget>[HomePage(), InfoPage()],
+            children: [
+              HomePage(),
+              SettingPage(), 
+              InfoPage()
+            ],
           )),
+    );
+  } 
+}
+
+class SettingPage extends StatefulWidget {
+  const SettingPage({super.key});
+
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        WindowTitleBarBox(
+          child: MoveWindow(
+            child: Container(
+              color: const Color.fromRGBO(250, 250, 250, 1)
+            )
+          )
+        ),
+        Text("")
+      ],
     );
   }
 }
