@@ -10,7 +10,7 @@ void main() {
   runApp(const MainApp());
   doWhenWindowReady(() {
     final win = appWindow;
-    const initialSize = Size(400, 700);
+    const initialSize = Size(400, 650);
     win.size = initialSize;
     win.minSize = initialSize;
     win.maxSize = initialSize;
@@ -451,10 +451,6 @@ class _HomePageState extends State<HomePage> {
                       labelText: "密码"
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("*关于程序，你可以在\"关于\"页面点击\"chfs\"，找到对应的版本后下载即可")
                 ],
               ),
             ),
