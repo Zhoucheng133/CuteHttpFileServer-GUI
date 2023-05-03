@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "chfs_mac_gui",
+            "name": "chfs_gui",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "chfs_mac_gui (profile mode)",
+            "name": "chfs_gui (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "chfs_mac_gui (release mode)",
+            "name": "chfs_gui (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
