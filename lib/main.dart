@@ -10,7 +10,7 @@ void main() {
   runApp(const MainApp());
   doWhenWindowReady(() {
     final win = appWindow;
-    const initialSize = Size(400, 620);
+    const initialSize = Size(400, 680);
     win.size = initialSize;
     win.minSize = initialSize;
     win.maxSize = initialSize;
@@ -153,9 +153,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
+  String? selectedProgram = "";
   TextEditingController inputPath = TextEditingController();
   TextEditingController inputUser = TextEditingController();
   TextEditingController inputPass = TextEditingController();
+  TextEditingController inputProgram = TextEditingController();
   int shareMethod = 1;
   bool isRun = false;
   var shell = Shell();
@@ -164,7 +166,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     inputPort.text = "81";
-    inputPath.text = "没有选择路径";
+    inputPath.text = "没有选择分享路径";
+    inputProgram.text="没有选择程序路径";
   }
 
   @override
@@ -254,11 +257,11 @@ class _HomePageState extends State<HomePage> {
               // 下面执行命令
               String command="";
               if(shareMethod==1){
-                command="lib/command/chfs_mac --port=${inputPort.text} --path=\"${inputPath.text}\"";
+                command="${inputProgram.text} --port=${inputPort.text} --path=\"${inputPath.text}\"";
               }else if(shareMethod==2){
-                command="lib/command/chfs_mac --port=${inputPort.text} --path=\"${inputPath.text}\" --rule=\"::r|${inputUser.text}:${inputPass.text}:rwd\"";
+                command="${inputProgram.text} --port=${inputPort.text} --path=\"${inputPath.text}\" --rule=\"::r|${inputUser.text}:${inputPass.text}:rwd\"";
               }else{
-                command="lib/command/chfs_mac --port=${inputPort.text} --path=\"${inputPath.text}\" --rule=\"::|${inputUser.text}:${inputPass.text}:rwd\"";
+                command="${inputProgram.text} --port=${inputPort.text} --path=\"${inputPath.text}\" --rule=\"::|${inputUser.text}:${inputPass.text}:rwd\"";
               }
               setState(() {
                 isRun=true;
@@ -314,7 +317,7 @@ class _HomePageState extends State<HomePage> {
                           controller: inputPath,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: "路径"
+                            labelText: "分享路径"
                           ),
                         ),
                       ),
@@ -329,6 +332,35 @@ class _HomePageState extends State<HomePage> {
                           });
                         },
                         child: Text("选取目录")
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 200,
+                        child: TextField(
+                          controller: inputProgram,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "程序路径"
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      ElevatedButton(
+                        onPressed: () async {
+                          FilePickerResult? tmp = await FilePicker.platform.pickFiles();
+                          // print(tmp?.files.single.path);
+                          setState(() {
+                            selectedProgram = tmp?.files.single.path;
+                            inputProgram.text = (tmp?.files.single.path).toString();
+                          });
+                        },
+                        child: Text("选取程序")
                       )
                     ],
                   ),
