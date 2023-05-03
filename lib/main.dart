@@ -41,6 +41,7 @@ class _MainApp extends State<MainApp> {
             currentIndex: curIndex,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "主页"),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label:"设置"),
               BottomNavigationBarItem(icon: Icon(Icons.info), label: "关于"),
             ],
             onTap: (int index) {
