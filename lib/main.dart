@@ -86,7 +86,6 @@ class _SettingPageState extends State<SettingPage> {
         // Text(sharedPreferences?.getBool("isRun")==true ? '正在运行':'不在运行'),
         TextButton(onPressed: (){
           _HomePageState._clearData();
-          print("OKOK");
         }, child: Text("清除"))
       ],
     );
@@ -216,18 +215,28 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 		String sharePath=prefs.getString("sharePath") ?? "";
 		String programPath=prefs.getString("programPath") ?? "";
+    String userName=prefs.getString("userName") ?? "";
+    String userPass=prefs.getString("userPass") ?? "";
 		if(sharePath!=''){
       inputPath.text=sharePath;
 		}
     if(programPath!=''){
       inputProgram.text=programPath;
     }
+    if(userName!=''){
+      inputUser.text=userName;
+    }
+    if(userPass!=''){
+      inputPass.text=userPass;
+    }
   }
 
-  void _setData(String sharePath, String programPath) async {
+  void _setData(String sharePath, String programPath, String userName, String userPass) async {
 		SharedPreferences prefs = await SharedPreferences.getInstance();
 		await prefs.setString('sharePath', sharePath);
 		await prefs.setString('programPath', programPath);
+    await prefs.setString('userName', userName);
+    await prefs.setString('userPass', userPass);
 	}
 
   @override
@@ -357,7 +366,7 @@ class _HomePageState extends State<HomePage> {
                 // We might get a shell exception
               }
 
-              _setData(inputPath.text,inputProgram.text);
+              _setData(inputPath.text,inputProgram.text,inputUser.text,inputPass.text);
             }else{
               shell.kill();
               setState(() {
