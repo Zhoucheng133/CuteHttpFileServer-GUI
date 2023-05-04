@@ -73,6 +73,27 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
 
   @override
+  void initState(){
+    super.initState();
+    _haveData();
+  }
+
+  void _setSave(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+		await prefs.setBool('saveHistory', value);
+  }
+
+  void _haveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+		bool saveH=prefs.getBool("saveHistory") ?? true;
+    if(saveH==false){
+      saveHistory=false;
+    }
+  }
+
+  bool saveHistory=true;
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -83,10 +104,39 @@ class _SettingPageState extends State<SettingPage> {
             )
           )
         ),
-        // Text(sharedPreferences?.getBool("isRun")==true ? '正在运行':'不在运行'),
-        TextButton(onPressed: (){
-          _HomePageState._clearData();
-        }, child: Text("清除"))
+        Text(
+          "设置",
+          style: TextStyle(fontSize: 15),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
+          child: Column(
+            children: [
+              // TextButton(onPressed: (){
+              //   _HomePageState._clearData();
+              // }, child: Text("清除"))
+              Row(
+                children: [
+                  Text("保存先前的记录"),
+                  Spacer(),
+                  Switch(
+                    value: saveHistory, 
+                    onChanged: (bool v){
+                      setState(() {
+                        saveHistory=v;
+                        if(v==false){
+                          _HomePageState._clearData();
+                        }
+                        _setSave(v);
+                      });
+                    }
+                  )
+                ],
+              )
+            ]
+          ),
+        )
+        
       ],
     );
   }
