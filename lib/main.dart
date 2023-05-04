@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages, unused_local_variable, avoid_unnecessary_containers, non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -76,6 +78,7 @@ class _SettingPageState extends State<SettingPage> {
   void initState(){
     super.initState();
     _haveData();
+    _getIP();
   }
 
   void _setSave(bool value) async {
@@ -91,7 +94,28 @@ class _SettingPageState extends State<SettingPage> {
     }
   }
 
+  void _getIP() async {
+    List data=['/','/'];
+
+    bool findIPv6=false;
+    bool findIPv4=false;
+
+    for (var interface in await NetworkInterface.list()) {
+      for (var addr in interface.addresses) {
+        if(addr.type.name=="IPv6" && findIPv6==false){
+          data[1]=(addr.address);
+          findIPv6=true;
+        }else if(addr.type.name=="IPv4" && findIPv4==false){
+          data[0]=(addr.address);
+          findIPv6=true;
+        }
+      }
+    }
+    ip=data;
+  }
+
   bool saveHistory=true;
+  List ip=['/','/'];
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +136,14 @@ class _SettingPageState extends State<SettingPage> {
           padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
           child: Column(
             children: [
-              // TextButton(onPressed: (){
-              //   _HomePageState._clearData();
-              // }, child: Text("清除"))
               Row(
                 children: [
-                  Text("保存先前的记录"),
+                  Text(
+                    "保存先前的记录",
+                    style: TextStyle(
+                      fontSize: 18
+                    ),
+                  ),
                   Spacer(),
                   Switch(
                     value: saveHistory, 
@@ -131,6 +157,50 @@ class _SettingPageState extends State<SettingPage> {
                       });
                     }
                   )
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "下面是你的ip信息:",
+                    style: TextStyle(
+                      fontSize: 18
+                    ),
+                  ),
+                  Spacer()
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text("IPv4地址:"),
+                  Spacer()
+                ],
+              ),
+              Row(
+                children: [
+                  Text(ip[0]),
+                  Spacer()
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Text("IPv6地址:"),
+                  Spacer()
+                ],
+              ),
+              Row(
+                children: [
+                  Text(ip[1]),
+                  Spacer()
                 ],
               )
             ]
