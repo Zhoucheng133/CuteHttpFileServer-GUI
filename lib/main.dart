@@ -212,15 +212,69 @@ class _SettingPageState extends State<SettingPage> {
                 child: Row(
                   children: [
                     TextButton(
-                      onPressed: (){
-
+                      onPressed: ()async{
+                        if(ip[0]!='/') {
+                          Clipboard.setData(ClipboardData(text: ip[0]+":"+_HomePageState.inputPort.text));
+                        }else{
+                          return showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('无法继续'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      Text('当前没有IPv4地址')
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('知道了'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
                       },
                       child: Text("复制IPv4地址")
                     ),
                     Spacer(),
                     TextButton(
-                      onPressed: (){
-
+                      onPressed: ()async{
+                        if(ip[1]!='/'){
+                          Clipboard.setData(ClipboardData(text: "[${ip[1]}]:${_HomePageState.inputPort.text}"));
+                        }else{
+                          return showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('无法继续'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      Text('当前没有IPv6地址')
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('知道了'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
                       },
                       child: Text("复制IPv6地址")
                     )
@@ -330,7 +384,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController inputPort = TextEditingController();
+  static TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
   String? selectedProgram = "";
   TextEditingController inputPath = TextEditingController();
