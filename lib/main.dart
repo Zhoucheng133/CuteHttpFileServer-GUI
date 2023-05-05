@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:process_run/shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MainApp());
@@ -202,6 +203,29 @@ class _SettingPageState extends State<SettingPage> {
                   Text(ip[1]),
                   Spacer()
                 ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: Row(
+                  children: [
+                    TextButton(
+                      onPressed: (){
+
+                      },
+                      child: Text("复制IPv4地址")
+                    ),
+                    Spacer(),
+                    TextButton(
+                      onPressed: (){
+
+                      },
+                      child: Text("复制IPv6地址")
+                    )
+                  ],
+                ),
               )
             ]
           ),
