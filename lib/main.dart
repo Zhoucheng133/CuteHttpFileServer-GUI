@@ -280,11 +280,46 @@ class _SettingPageState extends State<SettingPage> {
                     )
                   ],
                 ),
+              ),
+              TextButton(
+                onPressed: ()async{
+                  if(_HomePageState.isRun==false){
+                    return showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('无法继续'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: const <Widget>[
+                                Text('没有在运行')
+                              ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('知道了'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }else{
+                    Uri url = Uri.parse("http://${ip[0]}:${_HomePageState.inputPort.text}");
+                    if (!await launchUrl(url)) {
+                      throw Exception('Could not launch $url');
+                    }
+                  }
+                },
+                child: Text("打开本地的链接")
               )
             ]
           ),
         )
-        
       ],
     );
   }
@@ -392,7 +427,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController inputPass = TextEditingController();
   TextEditingController inputProgram = TextEditingController();
   int shareMethod = 1;
-  bool isRun = false;
+  static bool isRun = false;
   var shell = Shell();
 
   @override
