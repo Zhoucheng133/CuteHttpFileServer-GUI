@@ -397,8 +397,7 @@ class InfoPage extends StatelessWidget {
         ),
         IconButton(
           onPressed: () async {
-            Uri url = Uri.parse(
-                'https://gitee.com/Ryan-zhou/cute-http-file-server-gui');
+            Uri url = Uri.parse('https://gitee.com/Ryan-zhou/cute-http-file-server-gui');
             if (!await launchUrl(url)) {
               throw Exception('Could not launch $url');
             }
@@ -595,9 +594,7 @@ class _HomePageState extends State<HomePage> {
               });
               try {
                 await shell.run(command);
-              } on ShellException catch (_) {
-                // We might get a shell exception
-              }
+              } on ShellException catch (_) {}
 
               _setData(inputPath.text,inputProgram.text,inputUser.text,inputPass.text);
             }else{
@@ -605,7 +602,6 @@ class _HomePageState extends State<HomePage> {
               setState(() {
                 isRun=false;
               });
-              
             }
           },
           backgroundColor: Colors.blue,
