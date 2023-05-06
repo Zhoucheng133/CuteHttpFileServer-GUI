@@ -36,28 +36,6 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainApp extends State<MainApp> {
-  // @override
-  // void initState() {
-  //   windowManager.addListener(this);
-  //   _init();
-  //   super.initState();
-  // }
-
-  // void _init() async {
-  //   await windowManager.setPreventClose(true);
-  //   setState(() {});
-  // }
-
-  // @override
-  // void onWindowClose() async {
-  //   bool _isPreventClose = await windowManager.isPreventClose();
-  //   if (_isPreventClose) {
-  //     if(_HomePageState.isRun==true){
-        
-  //     }
-  //   }
-  // }
-
   var curIndex = 0;
 
   @override
