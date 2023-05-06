@@ -387,7 +387,7 @@ class InfoPage extends StatelessWidget {
         SizedBox(
           height: 50,
         ),
-        Text("Version: 1.1.0"),
+        Text("Version: 1.1.1"),
         SizedBox(
           height: 50,
         ),
