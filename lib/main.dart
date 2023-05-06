@@ -460,7 +460,14 @@ class _HomePageState extends State<HomePage> with WindowListener {
           context: context,
           builder: (_) {
             return AlertDialog(
-              title: Text('警告！没有停止程序运行，需要先停止程序'),
+              title: Text('无法退出'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Text("没有停止程序运行，需要先停止程序")
+                  ],
+                ),
+              ),
               actions: [
                 TextButton(
                   child: Text('好的'),
