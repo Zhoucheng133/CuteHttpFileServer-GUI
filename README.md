@@ -50,9 +50,9 @@
 
 ## 各种依赖
 
-- 【bitsdojo_window】用于控制窗口大小位置和边框透明
-- 【file_picker】用于实现文件和目录选择
-- 【process_run】用于实现终端中运行命令
-- 【shared_preferences】用于保存设置
-- 【url_launcher】用于打开链接
-- 【window_manager】用于在关闭窗口时判断程序是否在运行
+- `bitsdojo_window` 用于控制窗口大小位置和边框透明
+- `file_picker` 用于实现文件和目录选择
+- `process_run` 用于实现终端中运行命令
+- `shared_preferences` 用于保存设置
+- `url_launcher` 用于打开链接
+- `window_manager` 用于在关闭窗口时判断程序是否在运行
