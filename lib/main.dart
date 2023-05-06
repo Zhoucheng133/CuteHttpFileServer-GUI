@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages, unused_local_variable, avoid_unnecessary_containers, non_constant_identifier_names
+// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages, unused_local_variable, avoid_unnecessary_containers, non_constant_identifier_names, no_leading_underscores_for_local_identifiers, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -9,9 +9,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:process_run/shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
+import 'package:window_manager/window_manager.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
   doWhenWindowReady(() {
     final win = appWindow;
     const initialSize = Size(400, 650);
@@ -21,6 +24,8 @@ void main() {
     win.alignment = Alignment.center; //将窗口显示到中间
     win.show();
   });
+
+  runApp(const MainApp());
 }
 
 class MainApp extends StatefulWidget {
@@ -31,6 +36,28 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainApp extends State<MainApp> {
+  // @override
+  // void initState() {
+  //   windowManager.addListener(this);
+  //   _init();
+  //   super.initState();
+  // }
+
+  // void _init() async {
+  //   await windowManager.setPreventClose(true);
+  //   setState(() {});
+  // }
+
+  // @override
+  // void onWindowClose() async {
+  //   bool _isPreventClose = await windowManager.isPreventClose();
+  //   if (_isPreventClose) {
+  //     if(_HomePageState.isRun==true){
+        
+  //     }
+  //   }
+  // }
+
   var curIndex = 0;
 
   @override
@@ -417,7 +444,40 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WindowListener {
+
+  void _init() async {
+    await windowManager.setPreventClose(true);
+    setState(() {});
+  }
+
+  @override
+  void onWindowClose() async {
+    bool _isPreventClose = await windowManager.isPreventClose();
+    if (_isPreventClose) {
+      if(isRun==true){
+        showDialog(
+          context: context,
+          builder: (_) {
+            return AlertDialog(
+              title: Text('警告！没有停止程序运行，需要先停止程序'),
+              actions: [
+                TextButton(
+                  child: Text('好的'),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }else{
+        await windowManager.destroy();
+      }
+    }
+  }
+
   static TextEditingController inputPort = TextEditingController();
   String? selectedDirectory = "";
   String? selectedProgram = "";
@@ -432,10 +492,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     inputPort.text = "81";
     inputPath.text = "没有选择分享路径";
     inputProgram.text="没有选择程序路径";
     _haveData();
+
+    windowManager.addListener(this);
+    _init();
+    super.initState();
   }
   
   static void _clearData()async{
