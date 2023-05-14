@@ -46,27 +46,28 @@ class _MainApp extends State<MainApp> {
         splashFactory: NoSplash.splashFactory,
       ),
       home: Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: curIndex,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "主页"),
-              BottomNavigationBarItem(icon: Icon(Icons.settings), label:"配置"),
-              BottomNavigationBarItem(icon: Icon(Icons.info), label: "关于"),
-            ],
-            onTap: (int index) {
-              setState(() {
-                curIndex = index;
-              });
-            },
-          ),
-          body: IndexedStack(
-            index: curIndex,
-            children: [
-              HomePage(),
-              SettingPage(), 
-              InfoPage()
-            ],
-          )),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: curIndex,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "主页"),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label:"配置"),
+            BottomNavigationBarItem(icon: Icon(Icons.info), label: "关于"),
+          ],
+          onTap: (int index) {
+            setState(() {
+              curIndex = index;
+            });
+          },
+        ),
+        body: IndexedStack(
+          index: curIndex,
+          children: [
+            HomePage(),
+            SettingPage(), 
+            InfoPage()
+          ],
+        )
+      ),
     );
   } 
 }
