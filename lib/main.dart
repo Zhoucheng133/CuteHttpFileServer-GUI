@@ -700,8 +700,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
                       Spacer(),
                       ElevatedButton(
                         onPressed: () async {
-                          String? tmp =
-                              await FilePicker.platform.getDirectoryPath();
+                          String? tmp = await FilePicker.platform.getDirectoryPath();
                           setState(() {
                             selectedDirectory = tmp;
                             inputPath.text = tmp.toString();
