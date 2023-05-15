@@ -21,33 +21,10 @@
 - 对于文件`windows\runner\main.cpp`
 
   添加如下的两行：
-
   ```cpp
   #include <bitsdojo_window_windows/bitsdojo_window_plugin.h>
   auto bdw = bitsdojo_window_configure(BDW_CUSTOM_FRAME | BDW_HIDE_ON_STARTUP);
   ```
-
-- 对于文件`lib/main.dart`
-
-  需要修改的代码位于733行：
-
-  ```dart
-  // 注意，这里如果是Windows系统，需要修改为chfs.exe
-  if((tmp?.files.single.name).toString()!="chfs"){
-    // 其它代码
-  }
-  ```
-
-  修改为：
-
-  ```dart
-  // 注意，这里如果是Windows系统，需要修改为chfs.exe
-  if((tmp?.files.single.name).toString()!="chfs.exe"){
-    // 其它代码
-  }
-  ```
-
-后续版本可能会修改这部分操作
 
 ## 已知的问题和缺陷
 1. 无法判断用户是否选择了正确的程序【只能判断文件名称是否正确，后续版本更新】
