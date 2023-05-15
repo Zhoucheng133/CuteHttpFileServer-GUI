@@ -15,6 +15,40 @@
 - ❗️务必一定要在退出该软件前结束运行，软件本身可以在退出前检测是否在运行，但是在Mac端如果直接使用快捷键不会有任何提示
 - ❗️务必一定选择官方的正确程序
 
+## 如果你希望运行在Windows电脑上
+注意，本程序主要为macOS系统设计，虽然可以在Windows系统上运行，但是因为系统因素运行可能出现问题，因此如果你需要运行在Windows系统上，你可以选择使用官方的GUI版本，或者进行如下操作修改程序
+
+- 对于文件`windows\runner\main.cpp`
+
+  添加如下的两行：
+
+  ```cpp
+  #include <bitsdojo_window_windows/bitsdojo_window_plugin.h>
+  auto bdw = bitsdojo_window_configure(BDW_CUSTOM_FRAME | BDW_HIDE_ON_STARTUP);
+  ```
+
+- 对于文件`lib/main.dart`
+
+  需要修改的代码位于733行：
+
+  ```dart
+  // 注意，这里如果是Windows系统，需要修改为chfs.exe
+  if((tmp?.files.single.name).toString()!="chfs"){
+    // 其它代码
+  }
+  ```
+
+  修改为：
+
+  ```dart
+  // 注意，这里如果是Windows系统，需要修改为chfs.exe
+  if((tmp?.files.single.name).toString()!="chfs.exe"){
+    // 其它代码
+  }
+  ```
+
+后续版本可能会修改这部分操作
+
 ## 已知的问题和缺陷
 1. 无法判断用户是否选择了正确的程序
 2. (Mac)如果运行中使用`快捷键`退出本软件则会导致程序一直在运行
