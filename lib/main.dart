@@ -729,6 +729,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
                       ElevatedButton(
                         onPressed: () async {
                           FilePickerResult? tmp = await FilePicker.platform.pickFiles();
+                          // 注意，这里如果是Windows系统，需要修改为chfs.exe
                           if((tmp?.files.single.name).toString()!="chfs"){
                             return showDialog<void>(
                               context: context,
