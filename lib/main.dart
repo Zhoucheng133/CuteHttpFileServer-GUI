@@ -729,11 +729,37 @@ class _HomePageState extends State<HomePage> with WindowListener {
                       ElevatedButton(
                         onPressed: () async {
                           FilePickerResult? tmp = await FilePicker.platform.pickFiles();
-                          // print(tmp?.files.single.path);
-                          setState(() {
-                            selectedProgram = tmp?.files.single.path;
-                            inputProgram.text = (tmp?.files.single.path).toString();
-                          });
+                          if((tmp?.files.single.name).toString()!="chfs"){
+                            return showDialog<void>(
+                              context: context,
+                              barrierDismissible: false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('选取了错误的文件'),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: const <Widget>[
+                                        Text('你选取的并不是chfs程序')
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('知道了'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }else{
+                            setState(() {
+                              selectedProgram = tmp?.files.single.path;
+                              inputProgram.text = (tmp?.files.single.path).toString();
+                            });
+                          }
                         },
                         child: Text("选取程序")
                       )
