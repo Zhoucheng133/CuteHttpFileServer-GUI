@@ -739,11 +739,11 @@ class _HomePageState extends State<HomePage> with WindowListener {
                               barrierDismissible: false, // user must tap button!
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: const Text('选取了错误的文件'),
+                                  title: const Text('无法继续'),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: const <Widget>[
-                                        Text('你选取的并不是chfs程序')
+                                        Text('你选取的并不是chfs程序或没有选择')
                                       ],
                                     ),
                                   ),
