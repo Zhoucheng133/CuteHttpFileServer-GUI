@@ -788,7 +788,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
                             shareMethod=1;
                           });
                         },
-                        child: Text("所有设备:读/写")
+                        child: Text("所有访客:读/写")
                       )
                     ],
                   ),
@@ -808,7 +808,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
                             shareMethod=2;
                           });
                         },
-                        child: Text("所有设备:读取,指定用户:读/写"),
+                        child: Text("所有访客:读取,指定用户:读/写"),
                       )
                     ],
                   ),
