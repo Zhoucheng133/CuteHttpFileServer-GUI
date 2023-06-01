@@ -220,7 +220,7 @@ class _SettingPageState extends State<SettingPage> {
                     TextButton(
                       onPressed: ()async{
                         if(ip[0]!='/') {
-                          Clipboard.setData(ClipboardData(text: ip[0]+":"+_HomePageState.inputPort.text));
+                          Clipboard.setData(ClipboardData(text: "http://${ip[0]}:${_HomePageState.inputPort.text}"));
                         }else{
                           return showDialog<void>(
                             context: context,
@@ -254,7 +254,7 @@ class _SettingPageState extends State<SettingPage> {
                     TextButton(
                       onPressed: ()async{
                         if(ip[1]!='/'){
-                          Clipboard.setData(ClipboardData(text: "[${ip[1]}]:${_HomePageState.inputPort.text}"));
+                          Clipboard.setData(ClipboardData(text: "http://[${ip[1]}]:${_HomePageState.inputPort.text}"));
                         }else{
                           return showDialog<void>(
                             context: context,
