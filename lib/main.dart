@@ -366,7 +366,7 @@ class InfoPage extends StatelessWidget {
         SizedBox(
           height: 50,
         ),
-        Text("Version: 1.1.3"),
+        Text("Version: 1.1.4"),
         SizedBox(
           height: 50,
         ),
@@ -403,7 +403,7 @@ class InfoPage extends StatelessWidget {
         ),
         IconButton(
           onPressed: () async {
-            Uri url = Uri.parse('https://gitee.com/Ryan-zhou/cute-http-file-server-gui');
+            Uri url = Uri.parse('https://github.com/Zhoucheng133/CuteHttpFileServer-GUI');
             if (!await launchUrl(url)) {
               throw Exception('Could not launch $url');
             }
@@ -729,41 +729,10 @@ class _HomePageState extends State<HomePage> with WindowListener {
                       ElevatedButton(
                         onPressed: () async {
                           FilePickerResult? tmp = await FilePicker.platform.pickFiles();
-                          String name="chfs";
-                          if(Platform.isWindows){
-                            name="chfs.exe";
-                          }
-                          if((tmp?.files.single.name).toString()!=name){
-                            return showDialog<void>(
-                              context: context,
-                              barrierDismissible: false, // user must tap button!
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('无法继续'),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(
-                                      children: const <Widget>[
-                                        Text('你选取的并不是chfs程序或没有选择')
-                                      ],
-                                    ),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: const Text('知道了'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }else{
-                            setState(() {
-                              selectedProgram = tmp?.files.single.path;
-                              inputProgram.text = (tmp?.files.single.path).toString();
-                            });
-                          }
+                          setState(() {
+                            selectedProgram = tmp?.files.single.path;
+                            inputProgram.text = (tmp?.files.single.path).toString();
+                          });
                         },
                         child: Text("选取程序")
                       )
