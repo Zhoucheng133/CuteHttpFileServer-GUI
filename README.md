@@ -1,6 +1,7 @@
 # chfs 图形化版本
 
-> [!WARNING] 遗弃的项目
+> [!WARNING]
+> 遗弃的项目  
 > 如果你想要在多平台实现chfs功能的GUI程序，可以尝试[Sharer](https://github.com/Zhoucheng133/Sharer-App)(以HTTP网页形式)和[DAV Server](https://github.com/Zhoucheng133/DAV-Server)(以WebDAV形式)
 
 ## 关于这个软件
